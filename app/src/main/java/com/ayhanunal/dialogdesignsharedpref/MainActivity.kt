@@ -3,8 +3,12 @@ package com.ayhanunal.dialogdesignsharedpref
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
+import android.view.LayoutInflater
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +44,23 @@ class MainActivity : AppCompatActivity() {
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
          */
+
+        //method-2
+        val adb = AlertDialog.Builder(this)
+        val adbInflater = LayoutInflater.from(this)
+        val eulaLayout = adbInflater.inflate(R.layout.checkbox, null)
+
+        val dontShowAgain = eulaLayout.findViewById<CheckBox>(R.id.skip)
+        adb.setView(eulaLayout)
+        adb.setCancelable(false)
+        adb.setTitle("Your Title")
+        adb.setMessage("Your Dialog Messgae")
+        adb.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            Toast.makeText(applicationContext, dontShowAgain.isChecked.toString(), Toast.LENGTH_LONG).show()
+        })
+        adb.show()
+        
+
 
 
 
